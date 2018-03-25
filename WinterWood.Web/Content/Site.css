@@ -1,0 +1,89 @@
+﻿html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Verdana, Arial, Helvetica, Sans-serif;
+    font-size: 9px;
+    /*background-image: url(../images/128-212.jpg);
+    background-repeat: repeat;*/
+}
+
+#container {
+    min-height: 100%;
+    position: relative;
+    background-color: wheat;
+}
+
+#header {
+    /*background: #ff0;*/
+    font-family: Verdana, Arial, Helvetica, Sans-serif;
+    font-size: 12px;
+    padding: 25px;
+}
+
+#body {
+   
+    padding: 0px;
+    padding-bottom: 60px; /* Height of the footer */
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px; /* Height of the footer */
+    background: #6cf;
+    text-align: center;
+}
+/* other non-essential CSS */
+#header p,
+#header h1 {
+    margin: 0;
+    padding: 10px 0 0 10px;
+}
+
+#footer p {
+    margin: 0;
+    padding: 10px;
+}
+
+body .navbar {
+    background-color: #00008b;
+}
+
+table {
+    border-collapse: separate;
+    border: solid black 1px;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+}
+
+td, th {
+    border-left: solid black 1px;
+    border-top: solid black 1px;
+}
+
+th {
+    background-color: blue;
+    border-top: none;
+}
+
+td:first-child, th:first-child {
+    border-left: none;
+}
+table th {
+       
+    background-color: #00008b;
+    color: yellow;
+    text-align: center;
+    vertical-align: middle;
+}
+
+table tr:nth-child(even) {
+    background: #CCC
+}
+
+table tr:nth-child(odd) {
+    background: #FFF
+}

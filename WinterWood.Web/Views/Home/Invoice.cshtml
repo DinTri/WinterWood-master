@@ -1,0 +1,121 @@
+﻿@model PagedList.IPagedList<WinterWood.Entities.Invoice>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Invoice";
+}
+
+<h2>Outcome Required (User Story)</h2>
+
+@using (Html.BeginForm("Invoice", "Home", FormMethod.Get))
+{
+    <p>
+        Find by Name or Reference: @*@Html.TextBox("SearchString")*@
+        <input type="text" name="SearchString" />
+        <input class="btn-info" type="submit" value="Filter" />
+    </p>
+}
+<table class="table" searchString="invoices">
+
+    <tr>
+        <th>
+            Invoice Id
+        </th>
+        <th>
+            Account Id
+        </th>
+        <th>
+            @Html.ActionLink("Tax Point Date", "Invoice", new { sortOrder = ViewBag.DateSortParm, filter = ViewBag.filter })
+        </th>
+        <th>
+            Reference
+        </th>
+        <th>
+            Total Vat
+        </th>
+        <th>
+            Total Net
+        </th>
+        <th>
+            Total Gross
+        </th>
+        <th>
+            @Html.ActionLink("Name", "Invoice", new { sortOrder = ViewBag.NameSortParm, filter = ViewBag.filter })
+        </th>
+        <th>
+            Address 1
+        </th>
+        <th>
+            Address 2
+        </th>
+        <th>
+            Town
+        </th>
+        <th>
+            County
+        </th>
+        <th>
+            Post Code
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        var tdcolor = "Background-color:lightgreen;  font-weight: bold;";
+
+        if (item.TotalGross < 100)
+        {
+            tdcolor = "Background-color:#FF0000; font-weight: bold;";
+        }
+        else if (item.TotalGross > 100 && item.TotalGross <= 200)
+        {
+            tdcolor = "Background-color:yellow;  font-weight: bold;";
+        }
+
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxPointDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalNet)
+            </td>
+            <td style="@tdcolor">
+                @Html.DisplayFor(modelItem => item.TotalGross)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Address1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Address2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Town)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.County)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.PostCode)
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Invoice", new { page, sortOrder = ViewBag.CurrentSort, filter = ViewBag.filter }))
